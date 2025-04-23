@@ -6,7 +6,8 @@ import { tv } from 'tailwind-variants';
 
 const button = tv({
   slots: {
-    container: 'my-2 flex flex-row items-center justify-center rounded-md px-4',
+    container:
+      'my-2 flex flex-row items-center justify-center rounded-full px-4',
     label: 'font-inter text-base font-semibold',
     indicator: 'h-6 text-white',
   },
@@ -14,14 +15,14 @@ const button = tv({
   variants: {
     variant: {
       default: {
-        container: 'bg-black dark:bg-white',
+        container: 'bg-black dark:bg-primary-500',
         label: 'text-white dark:text-black',
         indicator: 'text-white dark:text-black',
       },
       secondary: {
-        container: 'bg-primary-600',
-        label: 'text-secondary-600',
-        indicator: 'text-white',
+        container: 'bg-blue-500 dark:bg-blue-500',
+        label: 'text-white dark:text-black',
+        indicator: 'text-white dark:text-black',
       },
       outline: {
         container: 'border border-neutral-400',

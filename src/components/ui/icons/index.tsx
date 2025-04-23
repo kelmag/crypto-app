@@ -1,5 +1,8 @@
 export * from './arrow-right';
+export * from './bnb';
+export * from './btc';
 export * from './caret-down';
+export * from './eth';
 export * from './feed';
 export * from './github';
 export * from './home';
@@ -7,6 +10,7 @@ export * from './language';
 export * from './rate';
 export * from './settings';
 export * from './share';
+export * from './sol';
 export * from './style';
 export * from './support';
 export * from './website';

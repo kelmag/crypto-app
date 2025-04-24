@@ -74,42 +74,46 @@ export function CoinCard({ coin, size = 'default' }: Props) {
   return (
     <Link
       href={`/(app)/${productId}`}
-      className={`${isLarge ? 'mt-2 w-full' : 'mr-2 w-[200px]'} rounded-3xl border border-neutral-900 bg-neutral-950 p-4`}
+      className={`${isLarge ? 'mt-2' : 'mr-2'}`}
     >
-      <CardHeader
-        symbol={symbol.toUpperCase()}
-        name={name}
-        price={currentPrice}
-        change={priceChangePercentage24h}
-        isLarge={isLarge}
-        image={image}
-        isPositive={isPositive}
-      />
-
       <View
-        className={`${isLarge ? 'flex-row-reverse items-end' : 'flex-col'}`}
+        className={`${isLarge ? 'w-full' : 'w-[200px]'} rounded-3xl border border-neutral-900 bg-neutral-950 p-4`}
       >
-        <View className={`${isLarge ? 'my-4 flex-1' : 'my-4'}`}>
-          <CryptoChart data={chartData} color={chartColor} height={80} />
-        </View>
+        <CardHeader
+          symbol={symbol.toUpperCase()}
+          name={name}
+          price={currentPrice}
+          change={priceChangePercentage24h}
+          isLarge={isLarge}
+          image={image}
+          isPositive={isPositive}
+        />
 
-        <View className={`${isLarge ? 'flex-1' : 'mt-2'}`}>
-          <View className="flex-row items-center justify-between">
-            <Text
-              className={`font-regular ${isLarge ? 'text-xl' : 'text-lg'} text-white`}
-            >
-              $
-              {currentPrice.toLocaleString('en-US', {
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2,
-              })}
-            </Text>
-            {!isLarge && (
-              <ChangePercent
-                isPositive={isPositive}
-                change={priceChangePercentage24h}
-              />
-            )}
+        <View
+          className={`${isLarge ? 'flex-row-reverse items-end' : 'flex-col'}`}
+        >
+          <View className={`${isLarge ? 'my-4 flex-1' : 'my-4'}`}>
+            <CryptoChart data={chartData} color={chartColor} height={80} />
+          </View>
+
+          <View className={`${isLarge ? 'flex-1' : 'mt-2'}`}>
+            <View className="flex-row items-center justify-between">
+              <Text
+                className={`font-regular ${isLarge ? 'text-xl' : 'text-lg'} text-white`}
+              >
+                $
+                {currentPrice.toLocaleString('en-US', {
+                  minimumFractionDigits: 2,
+                  maximumFractionDigits: 2,
+                })}
+              </Text>
+              {!isLarge && (
+                <ChangePercent
+                  isPositive={isPositive}
+                  change={priceChangePercentage24h}
+                />
+              )}
+            </View>
           </View>
         </View>
       </View>

@@ -16,7 +16,7 @@ const TABS: Tab[] = [
   { id: 'losers', title: '🔻 Top Losers' },
 ];
 
-function generateChartData(
+export function generateChartData(
   basePrice: number,
   volatility: number,
   changePercent?: number
@@ -173,12 +173,12 @@ type TabItemProps = {
   onPress: () => void;
 };
 
-function TabItem({ title, isActive, onPress }: TabItemProps) {
+export function TabItem({ title, isActive, onPress }: TabItemProps) {
   return (
     <View className="">
       <Text
         onPress={onPress}
-        className={`px-6 py-3 text-lg ${
+        className={`px-8 py-3 text-xl ${
           isActive ? 'text-primary-500' : 'text-neutral-500'
         }`}
       >

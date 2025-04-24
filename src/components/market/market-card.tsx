@@ -1,3 +1,4 @@
+/* eslint-disable max-lines-per-function */
 import * as React from 'react';
 import { View } from 'react-native';
 
@@ -12,9 +13,17 @@ type Props = {
   price: number;
   change: number;
   chartData: { timestamp: string; price: number }[];
+  size?: 'default' | 'lg';
 };
 
-export function MarketCard({ symbol, name, price, change, chartData }: Props) {
+export function MarketCard({
+  symbol,
+  name,
+  price,
+  change,
+  chartData,
+  size = 'default',
+}: Props) {
   const isPositive = change >= 0;
   const chartColor = isPositive ? colors.primary[500] : colors.danger[500];
 
@@ -33,8 +42,12 @@ export function MarketCard({ symbol, name, price, change, chartData }: Props) {
     }
   };
 
+  const isLarge = size === 'lg';
+
   return (
-    <View className="mr-4 w-[200px] rounded-3xl border border-neutral-900 bg-neutral-950 p-4">
+    <View
+      className={`${isLarge ? 'mt-2 w-full' : 'mr-2 w-[200px]'} rounded-3xl border border-neutral-900 bg-neutral-950 p-4`}
+    >
       <View className="flex-row items-start justify-between">
         <View className="flex-1">
           <View className="flex-row items-center">
@@ -47,34 +60,53 @@ export function MarketCard({ symbol, name, price, change, chartData }: Props) {
             </View>
           </View>
         </View>
+        {isLarge && <Change isPositive={isPositive} change={change} />}
       </View>
 
       {/* Chart */}
-      <View className="my-4">
-        <CryptoChart data={chartData} color={chartColor} height={60} />
-      </View>
+      <View
+        className={`${isLarge ? 'flex-row-reverse items-end' : 'flex-col'}`}
+      >
+        <View className={`${isLarge ? 'my-4 flex-1' : 'my-4'}`}>
+          <CryptoChart data={chartData} color={chartColor} height={80} />
+        </View>
 
-      <View className="mt-2">
-        <View className="flex-row items-center justify-between">
-          <Text className="font-regular text-lg text-white">
-            $
-            {price.toLocaleString('en-US', {
-              minimumFractionDigits: 2,
-              maximumFractionDigits: 2,
-            })}
-          </Text>
-          <View className="rounded-lg bg-neutral-900 p-1">
+        <View className={`${isLarge ? 'flex-1' : 'mt-2'}`}>
+          <View className="flex-row items-center justify-between">
             <Text
-              className={`text-sm font-light ${
-                isPositive ? 'dark:text-primary-500' : 'dark:text-danger-500'
-              }`}
+              className={`font-regular ${isLarge ? 'text-xl' : 'text-lg'} text-white`}
             >
-              {isPositive ? '+' : ''}
-              {change.toFixed(2)}%
+              $
+              {price.toLocaleString('en-US', {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+              })}
             </Text>
+            {!isLarge && <Change isPositive={isPositive} change={change} />}
           </View>
         </View>
       </View>
     </View>
   );
 }
+
+const Change = ({
+  isPositive,
+  change,
+}: {
+  isPositive: boolean;
+  change: number;
+}) => {
+  return (
+    <View className="rounded-lg bg-neutral-900 p-1">
+      <Text
+        className={`text-sm font-light ${
+          isPositive ? 'dark:text-primary-500' : 'dark:text-danger-500'
+        }`}
+      >
+        {isPositive ? '+' : ''}
+        {change.toFixed(2)}%
+      </Text>
+    </View>
+  );
+};

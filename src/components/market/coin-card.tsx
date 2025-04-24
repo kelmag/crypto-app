@@ -1,4 +1,5 @@
 /* eslint-disable max-lines-per-function */
+import { Link } from 'expo-router';
 import * as React from 'react';
 
 import { type Coin } from '@/api/types';
@@ -41,6 +42,7 @@ export function CoinCard({ coin, size = 'default' }: Props) {
     priceChangePercentage24h,
     image,
     sparkline,
+    productId,
   } = coin;
 
   // Create chart data in the correct format from sparkline
@@ -70,7 +72,8 @@ export function CoinCard({ coin, size = 'default' }: Props) {
   const isLarge = size === 'lg';
 
   return (
-    <View
+    <Link
+      href={`/(app)/${productId}`}
       className={`${isLarge ? 'mt-2 w-full' : 'mr-2 w-[200px]'} rounded-3xl border border-neutral-900 bg-neutral-950 p-4`}
     >
       <CardHeader
@@ -110,7 +113,7 @@ export function CoinCard({ coin, size = 'default' }: Props) {
           </View>
         </View>
       </View>
-    </View>
+    </Link>
   );
 }
 

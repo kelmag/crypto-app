@@ -17,3 +17,19 @@ export type Coin = {
   tradingVolume: number;
   symbol: string;
 };
+
+export type CoinData = {
+  date: number;
+  usd: {
+    open: number;
+    high: number;
+    low: number;
+    close: number;
+  };
+  aed: {
+    open: number;
+    high: number;
+    low: number;
+    close: number;
+  };
+};

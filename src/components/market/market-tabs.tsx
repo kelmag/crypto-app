@@ -3,7 +3,7 @@ import { ScrollView, View } from 'react-native';
 
 import { Text } from '@/components/ui';
 
-import { MarketCard } from './market-card';
+import { CoinCard } from './coin-card';
 
 type Tab = {
   id: string;
@@ -159,7 +159,7 @@ export function MarketTabs({ activeTab, onTabChange }: Props) {
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
         <View className="flex-row p-4">
           {activeData.map((item) => (
-            <MarketCard key={item.symbol} {...item} />
+            <CoinCard key={item.symbol} {...item} />
           ))}
         </View>
       </ScrollView>

@@ -1,8 +1,7 @@
 /* eslint-disable max-lines-per-function */
 import * as React from 'react';
-import { View } from 'react-native';
 
-import { colors, Text } from '@/components/ui';
+import { colors, Image, Text, View } from '@/components/ui';
 import { BnbIcon, BtcIcon, EthIcon, SolIcon } from '@/components/ui/icons';
 
 import { CryptoChart } from './crypto-chart';
@@ -14,33 +13,41 @@ type Props = {
   change: number;
   chartData: { timestamp: string; price: number }[];
   size?: 'default' | 'lg';
+  image?: string;
 };
 
-export function MarketCard({
+const renderCryptoIcon = (symbol: string, image: string | undefined) => {
+  switch (symbol) {
+    case 'BTC':
+      return <BtcIcon size={38} />;
+    case 'ETH':
+      return <EthIcon size={38} />;
+    case 'SOL':
+      return <SolIcon size={38} />;
+    case 'BNB':
+      return <BnbIcon size={38} />;
+    default:
+      return image ? (
+        <Image
+          source={{ uri: image }}
+          style={{ width: 38, height: 38 }}
+          contentFit="contain"
+        />
+      ) : null;
+  }
+};
+
+export function CoinCard({
   symbol,
   name,
   price,
   change,
   chartData,
+  image,
   size = 'default',
 }: Props) {
   const isPositive = change >= 0;
   const chartColor = isPositive ? colors.primary[500] : colors.danger[500];
-
-  const renderCryptoIcon = () => {
-    switch (symbol) {
-      case 'BTC':
-        return <BtcIcon size={38} />;
-      case 'ETH':
-        return <EthIcon size={38} />;
-      case 'SOL':
-        return <SolIcon size={38} />;
-      case 'BNB':
-        return <BnbIcon size={38} />;
-      default:
-        return null;
-    }
-  };
 
   const isLarge = size === 'lg';
 
@@ -48,22 +55,16 @@ export function MarketCard({
     <View
       className={`${isLarge ? 'mt-2 w-full' : 'mr-2 w-[200px]'} rounded-3xl border border-neutral-900 bg-neutral-950 p-4`}
     >
-      <View className="flex-row items-start justify-between">
-        <View className="flex-1">
-          <View className="flex-row items-center">
-            {renderCryptoIcon()}
-            <View className="ml-2">
-              <Text className="text-xl font-normal text-white">{symbol}</Text>
-              <Text className="text-base font-light dark:text-gray-500">
-                {name}
-              </Text>
-            </View>
-          </View>
-        </View>
-        {isLarge && <Change isPositive={isPositive} change={change} />}
-      </View>
+      <CardHeader
+        symbol={symbol}
+        name={name}
+        price={price}
+        change={change}
+        isLarge={isLarge}
+        image={image}
+        isPositive={isPositive}
+      />
 
-      {/* Chart */}
       <View
         className={`${isLarge ? 'flex-row-reverse items-end' : 'flex-col'}`}
       >
@@ -82,7 +83,9 @@ export function MarketCard({
                 maximumFractionDigits: 2,
               })}
             </Text>
-            {!isLarge && <Change isPositive={isPositive} change={change} />}
+            {!isLarge && (
+              <ChangePercent isPositive={isPositive} change={change} />
+            )}
           </View>
         </View>
       </View>
@@ -90,7 +93,41 @@ export function MarketCard({
   );
 }
 
-const Change = ({
+const CardHeader = ({
+  symbol,
+  name,
+  change,
+  isLarge,
+  image,
+  isPositive,
+}: {
+  symbol: string;
+  name: string;
+  price: number;
+  change: number;
+  isPositive: boolean;
+  isLarge: boolean;
+  image: string | undefined;
+}) => {
+  return (
+    <View className="flex-row items-start justify-between">
+      <View className="flex-1">
+        <View className="flex-row items-center">
+          {renderCryptoIcon(symbol, image)}
+          <View className="ml-2">
+            <Text className="text-xl font-normal text-white">{symbol}</Text>
+            <Text className="text-base font-light dark:text-gray-500">
+              {name}
+            </Text>
+          </View>
+        </View>
+      </View>
+      {isLarge && <ChangePercent isPositive={isPositive} change={change} />}
+    </View>
+  );
+};
+
+const ChangePercent = ({
   isPositive,
   change,
 }: {

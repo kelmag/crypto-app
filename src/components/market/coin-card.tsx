@@ -1,19 +1,15 @@
 /* eslint-disable max-lines-per-function */
 import * as React from 'react';
 
+import { type Coin } from '@/api/types';
 import { colors, Image, Text, View } from '@/components/ui';
 import { BnbIcon, BtcIcon, EthIcon, SolIcon } from '@/components/ui/icons';
 
 import { CryptoChart } from './crypto-chart';
 
 type Props = {
-  symbol: string;
-  name: string;
-  price: number;
-  change: number;
-  chartData: { timestamp: string; price: number }[];
+  coin: Coin;
   size?: 'default' | 'lg';
-  image?: string;
 };
 
 const renderCryptoIcon = (symbol: string, image: string | undefined) => {
@@ -37,16 +33,38 @@ const renderCryptoIcon = (symbol: string, image: string | undefined) => {
   }
 };
 
-export function CoinCard({
-  symbol,
-  name,
-  price,
-  change,
-  chartData,
-  image,
-  size = 'default',
-}: Props) {
-  const isPositive = change >= 0;
+export function CoinCard({ coin, size = 'default' }: Props) {
+  const {
+    symbol,
+    name,
+    currentPrice,
+    priceChangePercentage24h,
+    image,
+    sparkline,
+  } = coin;
+
+  // Create chart data in the correct format from sparkline
+  const chartData = React.useMemo(() => {
+    if (!sparkline || sparkline.length === 0) {
+      // Create fallback data if sparkline is missing
+      const data = [];
+      for (let i = 0; i < 24; i++) {
+        data.push({
+          timestamp: new Date(Date.now() - (24 - i) * 3600000).toISOString(),
+          price: currentPrice,
+        });
+      }
+      return data;
+    }
+
+    // Map sparkline data to the required format
+    return sparkline.map((price: number, index: number) => ({
+      timestamp: new Date(Date.now() - (24 - index) * 3600000).toISOString(),
+      price,
+    }));
+  }, [sparkline, currentPrice]);
+
+  const isPositive = priceChangePercentage24h >= 0;
   const chartColor = isPositive ? colors.primary[500] : colors.danger[500];
 
   const isLarge = size === 'lg';
@@ -56,10 +74,10 @@ export function CoinCard({
       className={`${isLarge ? 'mt-2 w-full' : 'mr-2 w-[200px]'} rounded-3xl border border-neutral-900 bg-neutral-950 p-4`}
     >
       <CardHeader
-        symbol={symbol}
+        symbol={symbol.toUpperCase()}
         name={name}
-        price={price}
-        change={change}
+        price={currentPrice}
+        change={priceChangePercentage24h}
         isLarge={isLarge}
         image={image}
         isPositive={isPositive}
@@ -78,13 +96,16 @@ export function CoinCard({
               className={`font-regular ${isLarge ? 'text-xl' : 'text-lg'} text-white`}
             >
               $
-              {price.toLocaleString('en-US', {
+              {currentPrice.toLocaleString('en-US', {
                 minimumFractionDigits: 2,
                 maximumFractionDigits: 2,
               })}
             </Text>
             {!isLarge && (
-              <ChangePercent isPositive={isPositive} change={change} />
+              <ChangePercent
+                isPositive={isPositive}
+                change={priceChangePercentage24h}
+              />
             )}
           </View>
         </View>

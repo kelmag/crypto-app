@@ -15,7 +15,7 @@ type Response = {
 
 type Variables = {
   currency: string;
-  per_page?: number;
+  pageSize?: number;
 };
 
 export const useAllCoins = createInfiniteQuery<Response, Variables, AxiosError>(
@@ -24,14 +24,14 @@ export const useAllCoins = createInfiniteQuery<Response, Variables, AxiosError>(
     initialPageParam: 1,
     fetcher: (variables, context) => {
       const page = context.pageParam ?? 1;
-      const per_page = variables?.per_page ?? DEFAULT_LIMIT;
+      const pageSize = variables?.pageSize ?? DEFAULT_LIMIT;
 
       return client
         .get(`coin-prices-all`, {
           params: {
             currency: variables?.currency,
             page,
-            per_page,
+            pageSize,
           },
         })
         .then((response) => response.data);

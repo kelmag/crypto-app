@@ -1,9 +1,10 @@
 import React from 'react';
 
 import type { Coin } from '@/api/types';
-import { CoinItem } from '@/components/market/coin-item';
 import { ListFooter } from '@/components/market/list-footer';
 import { List } from '@/components/ui';
+
+import { CoinCard } from './coin-card';
 
 type CoinListProps = {
   data: Coin[];
@@ -23,7 +24,7 @@ export function CoinList({
       className="flex-1"
       data={data}
       estimatedItemSize={190}
-      renderItem={CoinItem}
+      renderItem={({ item }) => <CoinCard coin={item} size="lg" />}
       keyExtractor={(item) => item.id}
       onEndReached={handleLoadMore}
       onEndReachedThreshold={0.5}

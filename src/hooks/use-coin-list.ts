@@ -14,7 +14,10 @@ type UseCoinListReturn = {
   refetch: () => void;
 };
 
-export function useCoinList(currency = 'usd', perPage = 20): UseCoinListReturn {
+export function useCoinList(
+  currency = 'usd',
+  pageSize = 20
+): UseCoinListReturn {
   const [search, setSearch] = React.useState('');
   const [debouncedSearch, setDebouncedSearch] = React.useState('');
 
@@ -38,7 +41,7 @@ export function useCoinList(currency = 'usd', perPage = 20): UseCoinListReturn {
   } = useAllCoins({
     variables: {
       currency,
-      per_page: perPage,
+      pageSize,
     },
   });
 

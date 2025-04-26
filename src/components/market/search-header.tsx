@@ -12,7 +12,7 @@ type SearchHeaderProps = {
 
 export function SearchHeader({ search, setSearch }: SearchHeaderProps) {
   return (
-    <View className="flex-row items-center justify-between">
+    <View className="mb-1 flex-row items-center justify-between">
       <View className="">
         <TabItem title="All Coins" isActive={true} onPress={() => {}} />
       </View>

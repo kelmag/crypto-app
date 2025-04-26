@@ -21,6 +21,7 @@ export function CoinList({
 }: CoinListProps) {
   return (
     <List
+      showsVerticalScrollIndicator={false}
       className="flex-1"
       data={data}
       estimatedItemSize={190}

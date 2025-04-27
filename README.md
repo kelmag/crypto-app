@@ -2,6 +2,13 @@
 
 A mobile application for tracking cryptocurrency prices and market data.
 
+## Demo
+
+[![Crypto App Demo](https://img.youtube.com/vi/nsnAoOzkYGA/0.jpg)](https://www.youtube.com/shorts/nsnAoOzkYGA)
+
+_Click on the image above to watch the demo video_
+
+
 ## Setup
 
 ```bash

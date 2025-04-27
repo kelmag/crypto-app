@@ -1,8 +1,9 @@
 /* eslint-disable max-lines-per-function */
-import { Stack, useLocalSearchParams } from 'expo-router';
+import { Stack, useLocalSearchParams, useRouter } from 'expo-router';
 import * as React from 'react';
 
 import { useCoin } from '@/api';
+import type { Coin } from '@/api/types';
 import { CoinDetail } from '@/components/market/coin-detail';
 import {
   ActivityIndicator,
@@ -48,6 +49,7 @@ export default function CoinDetailScreen() {
     name: string;
     image: string;
   }>();
+  const router = useRouter();
 
   const productId = Number(local.id);
   const { symbol, name, image } = local;
@@ -84,6 +86,20 @@ export default function CoinDetailScreen() {
   const handleTimeRangeChange = (range: TimeRange) => {
     setIsChangingTimeRange(true);
     setSelectedTimeRange(range);
+  };
+
+  // Handle coin change
+  const handleCoinChange = (coin: Coin) => {
+    // Navigate to the new coin's detail page
+    router.replace({
+      pathname: '/(app)/[id]',
+      params: {
+        id: coin.productId.toString(),
+        symbol: coin.symbol.toUpperCase(),
+        name: coin.name,
+        image: coin.image || '',
+      },
+    });
   };
 
   const { data, isPending, isError } = useCoin({
@@ -155,6 +171,7 @@ export default function CoinDetailScreen() {
         image={image}
         selectedTimeRange={selectedTimeRange}
         onTimeRangeChange={handleTimeRangeChange}
+        onCoinChange={handleCoinChange}
       />
     </>
   );

@@ -1,24 +1,29 @@
-import { useRouter } from 'expo-router';
+import { Redirect, useRouter } from 'expo-router';
 import React from 'react';
 
-import type { LoginFormProps } from '@/components/login-form';
-import { LoginForm } from '@/components/login-form';
+import { BiometricAuth } from '@/components/biometric-auth';
 import { FocusAwareStatusBar } from '@/components/ui';
 import { useAuth } from '@/lib';
 
 export default function Login() {
   const router = useRouter();
+  const status = useAuth.use.status();
+
   const signIn = useAuth.use.signIn();
 
-  const onSubmit: LoginFormProps['onSubmit'] = (data) => {
-    console.log(data);
+  if (status === 'signIn') {
+    return <Redirect href="/" />;
+  }
+
+  const handleAuthenticate = () => {
     signIn({ access: 'access-token', refresh: 'refresh-token' });
     router.push('/');
   };
+
   return (
     <>
       <FocusAwareStatusBar />
-      <LoginForm onSubmit={onSubmit} />
+      <BiometricAuth onAuthenticate={handleAuthenticate} />
     </>
   );
 }

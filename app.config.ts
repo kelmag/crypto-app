@@ -30,7 +30,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   version: Env.VERSION.toString(),
   orientation: 'portrait',
   icon: './assets/icon.png',
-  userInterfaceStyle: 'automatic',
+  userInterfaceStyle: 'dark',
   newArchEnabled: true,
   updates: {
     fallbackToCacheTimeout: 0,
@@ -49,7 +49,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   android: {
     adaptiveIcon: {
       foregroundImage: './assets/adaptive-icon.png',
-      backgroundColor: '#2E3C4B',
+      backgroundColor: '#ffffff',
     },
     package: Env.PACKAGE,
   },
@@ -61,7 +61,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     [
       'expo-splash-screen',
       {
-        backgroundColor: '#2E3C4B',
+        backgroundColor: '#ffffff',
         image: './assets/splash-icon.png',
         imageWidth: 150,
       },
@@ -76,6 +76,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     'expo-router',
     ['app-icon-badge', appIconBadgeConfig],
     ['react-native-edge-to-edge'],
+    'expo-local-authentication',
   ],
   extra: {
     ...ClientEnv,

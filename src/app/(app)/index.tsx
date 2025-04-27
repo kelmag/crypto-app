@@ -1,35 +1,51 @@
-import { FlashList } from '@shopify/flash-list';
 import React from 'react';
+import { Alert, TouchableOpacity } from 'react-native';
 
-import type { Post } from '@/api';
-import { usePosts } from '@/api';
-import { Card } from '@/components/card';
-import { EmptyList, FocusAwareStatusBar, Text, View } from '@/components/ui';
+import { AllCoins } from '@/components/market/all-coins';
+import { MarketTabs } from '@/components/market/market-tabs';
+import { FocusAwareStatusBar, SafeAreaView } from '@/components/ui';
+import { Logout } from '@/components/ui/icons/logout';
+import { signOut } from '@/lib';
 
-export default function Feed() {
-  const { data, isPending, isError } = usePosts();
-  const renderItem = React.useCallback(
-    ({ item }: { item: Post }) => <Card {...item} />,
-    []
-  );
+export default function Home() {
+  const [activeTab, setActiveTab] = React.useState('featured');
 
-  if (isError) {
-    return (
-      <View>
-        <Text> Error Loading data </Text>
-      </View>
-    );
-  }
   return (
-    <View className="flex-1 ">
+    <SafeAreaView className="flex-1 bg-white dark:bg-black" edges={['top']}>
       <FocusAwareStatusBar />
-      <FlashList
-        data={data}
-        renderItem={renderItem}
-        keyExtractor={(_, index) => `item-${index}`}
-        ListEmptyComponent={<EmptyList isLoading={isPending} />}
-        estimatedItemSize={300}
-      />
-    </View>
+      <MarketTabs activeTab={activeTab} onTabChange={setActiveTab} />
+      <AllCoins />
+
+      <LogoutButton />
+    </SafeAreaView>
+  );
+}
+
+function LogoutButton() {
+  const handleSignOut = () => {
+    Alert.alert(
+      'Sign Out',
+      'Are you sure you want to sign out?',
+      [
+        {
+          text: 'Cancel',
+          style: 'cancel',
+        },
+        {
+          text: 'Sign Out',
+          style: 'destructive',
+          onPress: () => signOut(),
+        },
+      ],
+      { cancelable: true }
+    );
+  };
+  return (
+    <TouchableOpacity
+      onPress={handleSignOut}
+      className="absolute bottom-8 right-8 size-14 items-center justify-center rounded-full bg-neutral-300 dark:bg-neutral-700"
+    >
+      <Logout color="#FF3440" />
+    </TouchableOpacity>
   );
 }

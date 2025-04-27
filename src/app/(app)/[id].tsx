@@ -4,6 +4,7 @@ import * as React from 'react';
 
 import { useCoin } from '@/api';
 import type { Coin } from '@/api/types';
+import { useAllCoins } from '@/api/use-all-coins';
 import { CoinDetail } from '@/components/market/coin-detail';
 import {
   ActivityIndicator,
@@ -102,6 +103,23 @@ export default function CoinDetailScreen() {
     });
   };
 
+  // Fetch the selected coin details to get market cap and volume
+  const { data: coinDetails } = useAllCoins({
+    variables: {
+      currency: 'usd',
+      pageSize: 10,
+    },
+  });
+
+  const selectedCoinDetails = React.useMemo(() => {
+    if (!coinDetails?.pages?.[0]?.data) return null;
+    return coinDetails.pages[0].data.find(
+      (coin) =>
+        coin.productId === productId ||
+        coin.symbol.toLowerCase() === symbol?.toLowerCase()
+    );
+  }, [coinDetails, productId, symbol]);
+
   const { data, isPending, isError } = useCoin({
     variables: {
       productId,
@@ -172,6 +190,8 @@ export default function CoinDetailScreen() {
         selectedTimeRange={selectedTimeRange}
         onTimeRangeChange={handleTimeRangeChange}
         onCoinChange={handleCoinChange}
+        marketCap={selectedCoinDetails?.marketCap}
+        tradingVolume={selectedCoinDetails?.tradingVolume}
       />
     </>
   );

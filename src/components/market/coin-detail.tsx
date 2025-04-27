@@ -1,3 +1,4 @@
+/* eslint-disable max-lines-per-function */
 import * as React from 'react';
 import { Pressable } from 'react-native';
 
@@ -37,6 +38,22 @@ type CoinDetailProps = {
   selectedTimeRange: TimeRange;
   onTimeRangeChange: (range: TimeRange) => void;
   onCoinChange?: (coin: Coin) => void;
+  marketCap?: number;
+  tradingVolume?: number;
+};
+
+const formatValue = (value?: number): string => {
+  if (!value) return 'N/A';
+
+  // Format large numbers with appropriate suffixes (B for billions, M for millions, etc.)
+  if (value >= 1_000_000_000) {
+    return `$${(value / 1_000_000_000).toFixed(2)}B`;
+  } else if (value >= 1_000_000) {
+    return `$${(value / 1_000_000).toFixed(2)}M`;
+  } else if (value >= 1_000) {
+    return `$${(value / 1_000).toFixed(2)}K`;
+  }
+  return `$${value.toFixed(2)}`;
 };
 
 // Price information component
@@ -46,6 +63,8 @@ function PriceInfo({
 }: {
   price: number;
   priceChangePercentage: number;
+  marketCap?: number;
+  tradingVolume?: number;
 }) {
   const isPositive = priceChangePercentage >= 0;
   const formattedPrice = new Intl.NumberFormat('en-US', {
@@ -275,6 +294,8 @@ export function CoinDetail({
   symbol,
   image,
   onCoinChange,
+  marketCap,
+  tradingVolume,
 }: CoinDetailProps) {
   const isPositive = priceChangePercentage >= 0;
   const chartColor = isPositive ? colors.primary[500] : colors.danger[500];
@@ -283,22 +304,45 @@ export function CoinDetail({
   return (
     <SafeAreaView className="flex-1 bg-black " edges={['bottom']}>
       <FocusAwareStatusBar />
-      <View className="mb-10 flex-1 rounded-b-[50px] bg-neutral-900 ">
+      <View className="mb-6 flex-1 rounded-b-[50px] bg-neutral-900 ">
         <BackgroundBlur />
         <View className="flex-1 pt-10">
-          <View className="flex-row items-start justify-between  px-4">
+          <View className="flex-row items-start justify-between   px-4">
             <PriceInfo
               price={price}
               priceChangePercentage={priceChangePercentage}
+              marketCap={marketCap}
+              tradingVolume={tradingVolume}
             />
-            <ChartTypeToggle
-              chartType={chartType}
-              onChartTypeChange={setChartType}
-            />
+            <View className="items-center">
+              <ChartTypeToggle
+                chartType={chartType}
+                onChartTypeChange={setChartType}
+              />
+            </View>
+          </View>
+          {/* Additional coin data */}
+          <View className=" flex-row justify-between  p-4">
+            <View className=" justify-between">
+              <Text className="text-sm font-medium text-gray-400">
+                Market Cap
+              </Text>
+              <Text className="text-sm font-medium text-white">
+                {formatValue(marketCap)}
+              </Text>
+            </View>
+            <View className="justify-between">
+              <Text className="text-sm font-medium text-gray-400">
+                24h Volume
+              </Text>
+              <Text className="text-sm font-medium text-white">
+                {formatValue(tradingVolume)}
+              </Text>
+            </View>
           </View>
 
           {/* Chart section */}
-          <View className="my-10 flex-1 justify-end">
+          <View className="mb-10 flex-1 justify-end ">
             <View className="flex-1 justify-center ">
               <ChartContent
                 isLoading={isLoading}

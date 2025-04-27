@@ -95,7 +95,12 @@ export function CoinCard({ coin, size = 'default' }: Props) {
           className={`${isLarge ? 'flex-row-reverse items-end' : 'flex-col'}`}
         >
           <View className={`${isLarge ? 'my-4 flex-1' : 'my-4'} `}>
-            <CryptoChart data={chartData} color={chartColor} height={80} />
+            <CryptoChart
+              data={chartData}
+              color={chartColor}
+              height={80}
+              showYAxis={false}
+            />
           </View>
 
           <View className={`${isLarge ? 'flex-1' : 'mt-2'} `}>

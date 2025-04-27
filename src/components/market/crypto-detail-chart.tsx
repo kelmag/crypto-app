@@ -1,31 +1,28 @@
 import * as React from 'react';
-import { Dimensions, Text } from 'react-native';
+import { Dimensions, View } from 'react-native';
 import { CandlestickChart } from 'react-native-wagmi-charts';
 
-import { View } from '@/components/ui';
+import { View as CustomView } from '@/components/ui';
 import colors from '@/components/ui/colors';
+
+import {
+  calculatePriceRange,
+  type CandleData,
+  Y_AXIS_WIDTH,
+  YAxis,
+} from './chart-axis';
 
 type DataPoint = {
   timestamp: string;
   price: number;
 };
 
-type CandleData = {
-  timestamp: number;
-  open: number;
-  high: number;
-  low: number;
-  close: number;
-};
-
 type Props = {
   data: DataPoint[];
   color?: string;
   height?: number;
+  showYAxis?: boolean;
 };
-
-// Width of the Y-axis column
-const Y_AXIS_WIDTH = 60;
 
 // Helper function to create candlestick data
 function createCandlestickData(data: DataPoint[]): CandleData[] {
@@ -49,97 +46,28 @@ function createCandlestickData(data: DataPoint[]): CandleData[] {
   });
 }
 
-// Format price as USD with k suffix
-function formatUSD(price: number) {
-  return price >= 1000
-    ? `$${Math.round(price / 1000)}k`
-    : price >= 100
-      ? `$${Math.round(price)}`
-      : price >= 10
-        ? `$${price.toFixed(1)}`
-        : price >= 1
-          ? `$${price.toFixed(2)}`
-          : `$${price.toFixed(3)}`;
-}
-
-// Y-axis label component
-function PriceLabel({ value, style }: { value: number; style?: any }) {
-  return (
-    <Text className="pr-2.5 text-right text-xs text-neutral-500" style={style}>
-      {formatUSD(value)}
-    </Text>
-  );
-}
-
-// Y-axis component that shows price values
-function YAxis({ data }: { data: CandleData[] }) {
-  // Calculate min and max values from OHLC data
-  const prices = React.useMemo(() => {
-    if (!data.length) return { min: 0, max: 0 };
-
-    const allPrices = data.flatMap((candle) => [
-      candle.open,
-      candle.high,
-      candle.low,
-      candle.close,
-    ]);
-
-    return {
-      min: Math.min(...allPrices),
-      max: Math.max(...allPrices),
-    };
-  }, [data]);
-
-  // Calculate price increments for the y-axis
-  const priceRange = prices.max - prices.min;
-  const priceStep = priceRange / 4;
-
-  return (
-    <View className="absolute right-0 h-full w-[60px] border-l border-white/10 bg-transparent py-2.5">
-      {/* Fixed positions for price labels */}
-      <View className="absolute right-1 top-2.5">
-        <PriceLabel value={prices.max} />
-      </View>
-
-      <View className="absolute right-1 top-1/4">
-        <PriceLabel value={prices.max - priceStep} />
-      </View>
-
-      <View className="absolute right-1 top-1/2">
-        <PriceLabel value={prices.min + priceRange / 2} />
-      </View>
-
-      <View className="absolute right-1 top-3/4">
-        <PriceLabel value={prices.min + priceStep} />
-      </View>
-
-      <View className="absolute bottom-2.5 right-1">
-        <PriceLabel value={prices.min} />
-      </View>
-    </View>
-  );
-}
-
 // Chart content component
 function ChartContent({
   data,
   height,
+  width,
 }: {
   data: CandleData[];
   height: number;
+  width: number | string;
 }) {
-  // Calculate chart width based on screen width minus the Y-axis
-  const chartWidth = React.useMemo(() => {
-    const screenWidth = Dimensions.get('window').width;
-    return screenWidth - Y_AXIS_WIDTH;
-  }, []);
+  // Convert width to number if it's a percentage string
+  const chartWidth = typeof width === 'string' ? undefined : width;
 
   return (
     <CandlestickChart.Provider data={data}>
       <CandlestickChart
         width={chartWidth}
         height={height}
-        style={{ backgroundColor: 'transparent', width: '100%' as const }}
+        style={{
+          backgroundColor: 'transparent',
+          ...(typeof width === 'number' ? { width } : {}),
+        }}
       >
         {/* Grid lines */}
         <View className="absolute inset-0">
@@ -188,29 +116,61 @@ function ChartContent({
   );
 }
 
-export function CryptoDetailChart({ data, height = 300 }: Props) {
+export function CryptoDetailChart({
+  data,
+  height = 300,
+  showYAxis = true,
+}: Props) {
   // Transform data to candlestick format
   const candlestickData = React.useMemo(
     () => createCandlestickData(data),
     [data]
   );
 
+  // Calculate price range for the Y-axis
+  const priceRange = React.useMemo(() => {
+    return calculatePriceRange(candlestickData);
+  }, [candlestickData]);
+
+  // Calculate chart width based on screen width minus the Y-axis width if showing
+  const chartWidth = React.useMemo(() => {
+    if (!showYAxis) return '100%';
+    const screenWidth = Dimensions.get('window').width;
+    return screenWidth - Y_AXIS_WIDTH;
+  }, [showYAxis]);
+
   if (candlestickData.length === 0) {
-    return <View className="h-full" style={{ height }} />;
+    return <CustomView className="h-full" style={{ height }} />;
   }
 
   return (
-    <View
-      className="flex-row overflow-hidden bg-transparent"
+    <CustomView
+      className="relative overflow-hidden bg-transparent"
       style={{ height }}
     >
-      {/* Chart container with fixed width to exclude Y-axis */}
-      <View className="mr-[60px] flex-1 overflow-hidden">
-        <ChartContent data={candlestickData} height={height} />
+      {/* Chart container */}
+      <View
+        style={{
+          width: chartWidth,
+          height: '100%',
+          position: 'relative',
+        }}
+      >
+        <ChartContent
+          data={candlestickData}
+          height={height}
+          width={chartWidth}
+        />
       </View>
 
       {/* Y-axis component */}
-      <YAxis data={candlestickData} />
-    </View>
+      {showYAxis && (
+        <YAxis
+          min={priceRange.min}
+          max={priceRange.max}
+          borderColor="rgba(255, 255, 255, 0.1)"
+        />
+      )}
+    </CustomView>
   );
 }

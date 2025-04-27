@@ -13,7 +13,7 @@ import { ExpandIcon } from '@/components/ui/icons';
 import { BgBlur } from '@/components/ui/icons/bg-blur';
 
 import { ChangePercent } from './change-percent';
-import { CryptoChart } from './crypto-chart';
+import { CryptoDetailChart } from './crypto-detail-chart';
 
 type TimeRange = '1H' | '1D' | '1W' | '1M' | '1Y' | 'ALL';
 
@@ -122,7 +122,11 @@ export function CoinDetail({
                   <ActivityIndicator />
                 </View>
               ) : (
-                <CryptoChart data={chartData} color={chartColor} height={300} />
+                <CryptoDetailChart
+                  data={chartData}
+                  color={chartColor}
+                  height={300}
+                />
               )}
             </View>
             <TimeRangeSelector

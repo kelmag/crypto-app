@@ -55,7 +55,7 @@ export default function CoinDetailScreen() {
   // Type definition for time range
   type TimeRange = '1H' | '1D' | '1W' | '1M' | '1Y' | 'ALL';
   const [selectedTimeRange, setSelectedTimeRange] =
-    React.useState<TimeRange>('1D');
+    React.useState<TimeRange>('1W');
 
   // Map time range to days parameter
   const getDaysFromTimeRange = (range: TimeRange): 1 | 7 | 30 | 365 | 'max' => {

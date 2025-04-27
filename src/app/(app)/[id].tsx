@@ -107,7 +107,7 @@ export default function CoinDetailScreen() {
   const { data: coinDetails } = useAllCoins({
     variables: {
       currency: 'usd',
-      pageSize: 10,
+      pageSize: 100,
     },
   });
 

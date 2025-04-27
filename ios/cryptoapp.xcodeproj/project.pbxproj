@@ -11,12 +11,12 @@
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		3E461D99554A48A4959DE609 /* SplashScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */; };
-		8488D0426EB747B691955A5E /* noop-file.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E331B87093E423DB0A2FC16 /* noop-file.swift */; };
+		7D439F0CC326D58D8FCD6547 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = A4B6C2BC37B537F764069CB2 /* PrivacyInfo.xcprivacy */; };
+		9557043D0F9E437080C889F8 /* noop-file.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91D43BEB78E0403F8C86A30C /* noop-file.swift */; };
 		96905EF65AED1B983A6B3ABC /* libPods-cryptoapp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 58EEBF8E8E6FB1BC6CAF49B5 /* libPods-cryptoapp.a */; };
 		B18059E884C0ABDD17F3DC3D /* ExpoModulesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC715A2D49A985799AEE119 /* ExpoModulesProvider.swift */; };
 		BB2F792D24A3F905000567C9 /* Expo.plist in Resources */ = {isa = PBXBuildFile; fileRef = BB2F792C24A3F905000567C9 /* Expo.plist */; };
-		E49E26FDE94C468E8414F6E6 /* Inter.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 78125599C9AA4C7B9A5FB10C /* Inter.ttf */; };
-		F31FAED10E070EACDE44A060 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = A215376B55B57E32E514F5BA /* PrivacyInfo.xcprivacy */; };
+		C49109698789461A9F0E30D4 /* Inter.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9F11875329A44E2093B6789E /* Inter.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,13 +26,13 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = cryptoapp/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = cryptoapp/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = cryptoapp/main.m; sourceTree = "<group>"; };
-		4A753B127B384EB296969095 /* cryptoapp-Bridging-Header.h */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.h; name = "cryptoapp-Bridging-Header.h"; path = "cryptoapp/cryptoapp-Bridging-Header.h"; sourceTree = "<group>"; };
 		58EEBF8E8E6FB1BC6CAF49B5 /* libPods-cryptoapp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-cryptoapp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C2E3173556A471DD304B334 /* Pods-cryptoapp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cryptoapp.debug.xcconfig"; path = "Target Support Files/Pods-cryptoapp/Pods-cryptoapp.debug.xcconfig"; sourceTree = "<group>"; };
-		78125599C9AA4C7B9A5FB10C /* Inter.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Inter.ttf; path = ../assets/fonts/Inter.ttf; sourceTree = "<group>"; };
+		710934AF04404231AAA10BFD /* cryptoapp-Bridging-Header.h */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.h; name = "cryptoapp-Bridging-Header.h"; path = "cryptoapp/cryptoapp-Bridging-Header.h"; sourceTree = "<group>"; };
 		7A4D352CD337FB3A3BF06240 /* Pods-cryptoapp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cryptoapp.release.xcconfig"; path = "Target Support Files/Pods-cryptoapp/Pods-cryptoapp.release.xcconfig"; sourceTree = "<group>"; };
-		9E331B87093E423DB0A2FC16 /* noop-file.swift */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.swift; name = "noop-file.swift"; path = "cryptoapp/noop-file.swift"; sourceTree = "<group>"; };
-		A215376B55B57E32E514F5BA /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xml; name = PrivacyInfo.xcprivacy; path = cryptoapp/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		91D43BEB78E0403F8C86A30C /* noop-file.swift */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.swift; name = "noop-file.swift"; path = "cryptoapp/noop-file.swift"; sourceTree = "<group>"; };
+		9F11875329A44E2093B6789E /* Inter.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Inter.ttf; path = ../assets/fonts/Inter.ttf; sourceTree = "<group>"; };
+		A4B6C2BC37B537F764069CB2 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xml; name = PrivacyInfo.xcprivacy; path = cryptoapp/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = SplashScreen.storyboard; path = cryptoapp/SplashScreen.storyboard; sourceTree = "<group>"; };
 		BB2F792C24A3F905000567C9 /* Expo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Expo.plist; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
@@ -61,9 +61,9 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB71A68108700A75B9A /* main.m */,
 				AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */,
-				9E331B87093E423DB0A2FC16 /* noop-file.swift */,
-				4A753B127B384EB296969095 /* cryptoapp-Bridging-Header.h */,
-				A215376B55B57E32E514F5BA /* PrivacyInfo.xcprivacy */,
+				91D43BEB78E0403F8C86A30C /* noop-file.swift */,
+				710934AF04404231AAA10BFD /* cryptoapp-Bridging-Header.h */,
+				A4B6C2BC37B537F764069CB2 /* PrivacyInfo.xcprivacy */,
 			);
 			name = cryptoapp;
 			sourceTree = "<group>";
@@ -75,6 +75,14 @@
 				58EEBF8E8E6FB1BC6CAF49B5 /* libPods-cryptoapp.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6DD69814031B40EB84CB98A6 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				9F11875329A44E2093B6789E /* Inter.ttf */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
@@ -93,7 +101,7 @@
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				D65327D7A22EEC0BE12398D9 /* Pods */,
 				D7E4C46ADA2E9064B798F356 /* ExpoModulesProviders */,
-				988A9FF381564DA8B821033D /* Resources */,
+				6DD69814031B40EB84CB98A6 /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -114,14 +122,6 @@
 				FAC715A2D49A985799AEE119 /* ExpoModulesProvider.swift */,
 			);
 			name = cryptoapp;
-			sourceTree = "<group>";
-		};
-		988A9FF381564DA8B821033D /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				78125599C9AA4C7B9A5FB10C /* Inter.ttf */,
-			);
-			name = Resources;
 			sourceTree = "<group>";
 		};
 		BB2F792B24A3F905000567C9 /* Supporting */ = {
@@ -158,13 +158,13 @@
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "cryptoapp" */;
 			buildPhases = (
 				08A4A3CD28434E44B6B9DE2E /* [CP] Check Pods Manifest.lock */,
-				C507F9CC5020971F1DC19558 /* [Expo] Configure project */,
+				BBAF8DD5C97B6C29AF1E2A59 /* [Expo] Configure project */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
 				800E24972A6A228C8D4807E9 /* [CP] Copy Pods Resources */,
-				C32462A6D227C5D79EC39BAC /* [CP] Embed Pods Frameworks */,
+				A0ED6BF66DC10B8A82486379 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -214,8 +214,8 @@
 				BB2F792D24A3F905000567C9 /* Expo.plist in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				3E461D99554A48A4959DE609 /* SplashScreen.storyboard in Resources */,
-				E49E26FDE94C468E8414F6E6 /* Inter.ttf in Resources */,
-				F31FAED10E070EACDE44A060 /* PrivacyInfo.xcprivacy in Resources */,
+				C49109698789461A9F0E30D4 /* Inter.ttf in Resources */,
+				7D439F0CC326D58D8FCD6547 /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -301,7 +301,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-cryptoapp/Pods-cryptoapp-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		C32462A6D227C5D79EC39BAC /* [CP] Embed Pods Frameworks */ = {
+		A0ED6BF66DC10B8A82486379 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -319,7 +319,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-cryptoapp/Pods-cryptoapp-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		C507F9CC5020971F1DC19558 /* [Expo] Configure project */ = {
+		BBAF8DD5C97B6C29AF1E2A59 /* [Expo] Configure project */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
@@ -348,7 +348,7 @@
 				13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 				B18059E884C0ABDD17F3DC3D /* ExpoModulesProvider.swift in Sources */,
-				8488D0426EB747B691955A5E /* noop-file.swift in Sources */,
+				9557043D0F9E437080C889F8 /* noop-file.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -14,8 +14,9 @@ pnpm start -cc
 
 ## Usage
 
-- `pnpm start -cc`: Start the development server
+- `npx expo prebuild --clean` Prebuild app
 - `pnpm ios`: Build for iOS
+- `pnpm start -cc`: Start the development server
 - `pnpm android`: Build for Android
 
 ## Stack

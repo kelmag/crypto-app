@@ -8,6 +8,9 @@ A mobile application for tracking cryptocurrency prices and market data.
 # Install dependencies
 pnpm install
 
+# run the app on simulator
+pnpm ios
+
 # Start the development server
 pnpm start -cc
 ```

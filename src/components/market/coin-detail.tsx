@@ -133,7 +133,7 @@ export function CoinDetail({
 }: CoinDetailProps) {
   const isPositive = priceChangePercentage >= 0;
   const chartColor = isPositive ? colors.primary[500] : colors.danger[500];
-  const [chartType, setChartType] = React.useState<ChartType>('line');
+  const [chartType, setChartType] = React.useState<ChartType>('candlestick');
 
   return (
     <SafeAreaView className="flex-1 bg-black " edges={['bottom']}>

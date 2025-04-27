@@ -10,6 +10,18 @@ import { signOut } from '@/lib';
 export default function Home() {
   const [activeTab, setActiveTab] = React.useState('featured');
 
+  return (
+    <SafeAreaView className="flex-1 bg-white dark:bg-black" edges={['top']}>
+      <FocusAwareStatusBar />
+      <MarketTabs activeTab={activeTab} onTabChange={setActiveTab} />
+      <AllCoins />
+
+      <LogoutButton />
+    </SafeAreaView>
+  );
+}
+
+function LogoutButton() {
   const handleSignOut = () => {
     Alert.alert(
       'Sign Out',
@@ -28,20 +40,12 @@ export default function Home() {
       { cancelable: true }
     );
   };
-
   return (
-    <SafeAreaView className="flex-1 bg-white dark:bg-black" edges={['top']}>
-      <FocusAwareStatusBar />
-      <MarketTabs activeTab={activeTab} onTabChange={setActiveTab} />
-      <AllCoins />
-
-      <TouchableOpacity
-        onPress={handleSignOut}
-        className="absolute bottom-8 right-8 size-14 items-center justify-center rounded-full bg-neutral-300 dark:bg-neutral-700"
-        activeOpacity={0.8}
-      >
-        <Logout color="#FF3440" />
-      </TouchableOpacity>
-    </SafeAreaView>
+    <TouchableOpacity
+      onPress={handleSignOut}
+      className="absolute bottom-8 right-8 size-14 items-center justify-center rounded-full bg-neutral-300 dark:bg-neutral-700"
+    >
+      <Logout color="#FF3440" />
+    </TouchableOpacity>
   );
 }
